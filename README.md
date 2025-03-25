@@ -1,0 +1,1 @@
+# dynamic-kubernetes-secret-editor
