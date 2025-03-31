@@ -87,6 +87,10 @@ body.dark-mode .strong {
   text-decoration: none;
 }
 
+body.dark-mode .footer-icons a {
+  color: #fff;
+}
+
 #github:hover {
   color: #333;
   text-shadow: #333 0 0 1px;
