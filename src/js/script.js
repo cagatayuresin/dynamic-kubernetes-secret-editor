@@ -1,24 +1,15 @@
-/**
- * Dynamic Kubernetes Secret Editor
- * This script provides functionality to decode, edit, and manage Kubernetes secrets.
- * It includes features such as YAML file upload, Base64 decoding, YAML preview, 
- * theme toggling, and saving/restoring state using localStorage.
- */
+let currentSecretObj = null;
 
-let currentSecretObj = null; // Stores the current Kubernetes Secret object
-
-// Restore state from localStorage when the page loads
+// Restore state from localStorage
 window.addEventListener("DOMContentLoaded", () => {
-  const savedYaml = localStorage.getItem("yamlContent"); // Retrieve saved YAML content
-  const savedSecret = localStorage.getItem("secretObject"); // Retrieve saved secret object
-  const theme = localStorage.getItem("theme"); // Retrieve saved theme preference
+  const savedYaml = localStorage.getItem("yamlContent");
+  const savedSecret = localStorage.getItem("secretObject");
+  const theme = localStorage.getItem("theme");
 
-  // Apply the saved theme (dark or light)
   if (theme === "dark") {
     applyTheme("dark");
   }
 
-  // Restore the secret object and update the UI
   if (savedSecret) {
     try {
       currentSecretObj = JSON.parse(savedSecret);
@@ -29,51 +20,41 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  // Restore the YAML preview
   if (savedYaml) {
     document.getElementById("secretOutput").textContent = savedYaml;
     hljs.highlightElement(document.getElementById("secretOutput"));
   }
 
-  // Ensure floating buttons are always visible
+  // Show floating buttons always
   document.querySelectorAll("#floatingButtons button").forEach((btn) => {
     btn.classList.add("active");
   });
 });
 
-/**
- * Updates the YAML preview in the UI and saves it to localStorage.
- */
+// Update YAML preview
 function updateYamlOutput() {
   if (!currentSecretObj) return;
 
-  // Convert the secret object to YAML format
   const yamlOutput = jsyaml.dump(currentSecretObj, {
     lineWidth: -1, // Prevent folded format (e.g., >-)
   });
 
-  // Update the YAML preview element
   const outputEl = document.getElementById("secretOutput");
   outputEl.textContent = yamlOutput;
   hljs.highlightElement(outputEl);
 
-  // Save the YAML content and secret object to localStorage
   localStorage.setItem("yamlContent", yamlOutput);
   localStorage.setItem("secretObject", JSON.stringify(currentSecretObj));
 }
 
-/**
- * Renders decoded Base64 fields as editable input fields in the UI.
- */
+// Render decoded base64 fields as inputs
 function renderDecodedFields() {
   const container = document.getElementById("dataInputs");
-  container.innerHTML = ""; // Clear existing fields
+  container.innerHTML = "";
 
-  // Iterate over each key-value pair in the secret data
   Object.entries(currentSecretObj.data || {}).forEach(([key, base64Val]) => {
-    const decoded = atob(base64Val); // Decode the Base64 value
+    const decoded = atob(base64Val);
 
-    // Create a field for the decoded value
     const field = document.createElement("div");
     field.className = "field";
 
@@ -87,9 +68,8 @@ function renderDecodedFields() {
     input.value = decoded;
     input.dataset.key = key;
 
-    // Update the secret object when the input value changes
     input.addEventListener("input", () => {
-      const encoded = btoa(input.value); // Encode the value back to Base64
+      const encoded = btoa(input.value);
       currentSecretObj.data[key] = encoded;
       updateYamlOutput();
     });
@@ -100,34 +80,35 @@ function renderDecodedFields() {
   });
 }
 
-// Handle YAML file upload
-document.getElementById("yamlInput").addEventListener("change", function (event) {
-  const file = event.target.files[0];
-  if (!file) return;
+// YAML file upload handler
+document
+  .getElementById("yamlInput")
+  .addEventListener("change", function (event) {
+    const file = event.target.files[0];
+    if (!file) return;
 
-  const reader = new FileReader();
-  reader.onload = function (e) {
-    try {
-      const content = e.target.result;
-      const parsed = jsyaml.load(content);
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      try {
+        const content = e.target.result;
+        const parsed = jsyaml.load(content);
 
-      // Validate if the uploaded file is a Kubernetes Secret
-      if (parsed.kind === "Secret" && parsed.apiVersion?.startsWith("v1")) {
-        currentSecretObj = parsed;
-        updateYamlOutput();
-        renderDecodedFields();
-      } else {
-        alert("This YAML is not a valid Kubernetes Secret.");
+        if (parsed.kind === "Secret" && parsed.apiVersion?.startsWith("v1")) {
+          currentSecretObj = parsed;
+          updateYamlOutput();
+          renderDecodedFields();
+        } else {
+          alert("This YAML is not a valid Kubernetes Secret.");
+        }
+      } catch (err) {
+        alert("Failed to parse YAML.");
       }
-    } catch (err) {
-      alert("Failed to parse YAML.");
-    }
-  };
+    };
 
-  reader.readAsText(file);
-});
+    reader.readAsText(file);
+  });
 
-// Copy YAML content to clipboard
+// Copy YAML to clipboard
 document.getElementById("copyBtn").addEventListener("click", () => {
   const text = document.getElementById("secretOutput").textContent;
   navigator.clipboard.writeText(text).then(() => {
@@ -135,7 +116,7 @@ document.getElementById("copyBtn").addEventListener("click", () => {
   });
 });
 
-// Download YAML content as a file
+// Download YAML as file
 document.getElementById("downloadBtn").addEventListener("click", () => {
   const yamlText = document.getElementById("secretOutput").textContent;
   const blob = new Blob([yamlText], { type: "text/yaml" });
@@ -147,13 +128,10 @@ document.getElementById("downloadBtn").addEventListener("click", () => {
   alert("YAML downloaded!");
 });
 
-// Toggle between dark and light themes
+// Dark/light theme toggle
 const toggleThemeBtn = document.getElementById("toggleThemeBtn");
 const themeIcon = document.getElementById("themeIcon");
 
-/**
- * Sets the logo based on the current theme.
- */
 function setLogo() {
   const imagePlaceholder = document.getElementById("imagePlaceholder");
 
@@ -169,10 +147,6 @@ function setLogo() {
   imagePlaceholder.appendChild(imgElement);
 }
 
-/**
- * Applies the selected theme (dark or light) to the UI.
- * @param {string} mode - The theme mode ("dark" or "light").
- */
 function applyTheme(mode) {
   const imgElement = document.getElementById("logo");
   const yamlTheme = document.getElementById("yamlTheme");
@@ -193,17 +167,15 @@ function applyTheme(mode) {
   }
 }
 
-// Toggle theme on button click
 toggleThemeBtn.addEventListener("click", () => {
   const isDark = document.body.classList.contains("dark-mode");
   applyTheme(isDark ? "light" : "dark");
 });
 
-// Scroll back to the top of the page
+// Back to top functionality
 const backToTopBtn = document.getElementById("backToTopBtn");
 backToTopBtn.addEventListener("click", () => {
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
 
-// Initialize the logo on page load
-setLogo();
+setLogo(); // Set the logo on page load

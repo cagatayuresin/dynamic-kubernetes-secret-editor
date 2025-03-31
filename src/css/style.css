@@ -21,7 +21,8 @@ body.dark-mode .box {
 }
 
 /* Input and textarea styling in dark mode */
-body.dark-mode .input {
+body.dark-mode .input,
+body.dark-mode .textarea {
   background-color: #333;
   color: #eee;
   border-color: #555;
@@ -41,7 +42,7 @@ body.dark-mode .strong {
 }
 
 /* ============================
-     YAML Preview Styles
+   YAML Preview Styles
    ============================ */
 
 /* Code block styling */
@@ -53,7 +54,7 @@ pre code {
 }
 
 /* ============================
-     Floating Button Styles
+   Floating Button Styles
    ============================ */
 
 /* Floating button container */
@@ -94,7 +95,7 @@ pre code {
 }
 
 /* ============================
-     Footer Styles
+   Footer Styles
    ============================ */
 
 /* Footer icon links */
