@@ -79,6 +79,55 @@
                 </label>
             </div>
 
+            <!-- OR Divider -->
+            <div class="has-text-centered mb-4">
+                <span class="tag is-light is-medium">OR</span>
+            </div>
+
+            <!-- Paste YAML Area -->
+            <div class="box mb-4">
+                <h3 class="label">
+                    <i class="ti ti-clipboard"></i>
+                    Paste YAML Content
+                </h3>
+                <div class="field">
+                    <div class="control">
+                        <textarea 
+                            class="textarea" 
+                            id="yamlTextarea" 
+                            placeholder="Paste your Kubernetes Secret YAML here...
+Example:
+apiVersion: v1
+kind: Secret
+metadata:
+  name: my-secret
+type: Opaque
+data:
+  username: dXNlcm5hbWU=
+  password: cGFzc3dvcmQ="
+                            rows="8"
+                            style="font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem;"
+                        ></textarea>
+                    </div>
+                </div>
+                <div class="buttons is-centered">
+                    <button class="button is-primary" id="processYamlBtn">
+                        <span class="icon"><i class="ti ti-player-play"></i></span>
+                        <span>Process YAML</span>
+                    </button>
+                    <button class="button is-light" id="clearYamlBtn">
+                        <span class="icon"><i class="ti ti-eraser"></i></span>
+                        <span>Clear</span>
+                    </button>
+                </div>
+                <div class="has-text-centered">
+                    <small class="help is-grey">
+                        <i class="ti ti-info-circle"></i>
+                        <strong>Shortcuts:</strong> Ctrl+Enter to process • Ctrl+Shift+C to clear • Tab for indentation
+                    </small>
+                </div>
+            </div>
+
             <!-- Data Management Tools -->
             <div class="box">
                 <h2 class="title is-6">Data Management</h2>
@@ -143,6 +192,19 @@
                 <strong class="strong">Dynamic Kubernetes Secret Editor</strong> by
                 <a href="https://cagatayuresin.com" target="_blank">Çağatay Üresin</a>. The source code is licensed
                 <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.
+            </p>
+            <p class="footer-version" style="margin-top: 8px;">
+                <span class="tag is-info is-light">
+                    <i class="ti ti-tag"></i>
+                    <span style="margin-left: 4px;">Version 2.0.0</span>
+                </span>
+                <a href="https://github.com/cagatayuresin/dynamic-kubernetes-secret-editor/blob/main/CHANGELOG.md" 
+                   target="_blank" 
+                   class="tag is-link is-light" 
+                   style="margin-left: 8px;">
+                    <i class="ti ti-file-text"></i>
+                    <span style="margin-left: 4px;">Changelog</span>
+                </a>
             </p>
         </div>
     </footer>

@@ -198,17 +198,39 @@ body.dark-mode .footer-icons a {
 /* Improved file upload styling */
 .file.is-boxed .file-cta {
   transition: all 0.3s ease;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 2rem 3rem;
+  font-weight: 600;
+  box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
 .file.is-boxed:hover .file-cta {
-  background-color: #3273dc;
-  color: white;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.4);
+  background: linear-gradient(135deg, #5a6fd8 0%, #6a5acd 100%);
+}
+
+.file.is-boxed .file-icon {
+  margin-right: 0.75rem;
+  font-size: 1.5rem;
+}
+
+.file.is-boxed .file-label {
+  font-size: 1.1rem;
+  letter-spacing: 0.5px;
+}
+
+body.dark-mode .file.is-boxed .file-cta {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  box-shadow: 0 4px 15px rgba(79, 172, 254, 0.3);
 }
 
 body.dark-mode .file.is-boxed:hover .file-cta {
-  background-color: #485fc7;
+  background: linear-gradient(135deg, #3d8bfe 0%, #00d4ff 100%);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.4);
 }
 
 /* Improved button styling */
@@ -219,6 +241,80 @@ body.dark-mode .file.is-boxed:hover .file-cta {
 .button:hover {
   transform: translateY(-1px);
   box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* YAML paste area styling */
+#yamlTextarea {
+  background-color: #f8f9fa;
+  border: 2px dashed #dee2e6;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+  resize: vertical;
+  min-height: 150px;
+}
+
+#yamlTextarea:focus {
+  border-color: #667eea;
+  border-style: solid;
+  box-shadow: 0 0 0 0.125rem rgba(102, 126, 234, 0.25);
+  background-color: #ffffff;
+}
+
+#yamlTextarea::placeholder {
+  color: #6c757d;
+  font-style: italic;
+}
+
+body.dark-mode #yamlTextarea {
+  background-color: #2a2a2a;
+  border-color: #444;
+  color: #eee;
+}
+
+body.dark-mode #yamlTextarea:focus {
+  background-color: #333;
+  border-color: #4facfe;
+  box-shadow: 0 0 0 0.125rem rgba(79, 172, 254, 0.25);
+}
+
+body.dark-mode #yamlTextarea::placeholder {
+  color: #999;
+}
+
+/* OR divider styling */
+.tag.is-light.is-medium {
+  background: linear-gradient(135deg, #f1f3f4 0%, #e8eaed 100%);
+  color: #5f6368;
+  font-weight: 600;
+  padding: 8px 16px;
+  border-radius: 20px;
+}
+
+body.dark-mode .tag.is-light.is-medium {
+  background: linear-gradient(135deg, #3a3a3a 0%, #2a2a2a 100%);
+  color: #ccc;
+}
+
+/* Footer version styling */
+.footer-version .tag {
+  font-size: 0.85rem;
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.footer-version .tag:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .footer-version .tag.is-info.is-light {
+  background-color: rgba(79, 172, 254, 0.1);
+  color: #4facfe;
+}
+
+body.dark-mode .footer-version .tag.is-link.is-light {
+  background-color: rgba(50, 115, 220, 0.1);
+  color: #3273dc;
 }
 
 /* Field spacing */

@@ -98,35 +98,101 @@ document
 
     const reader = new FileReader();
     reader.onload = function (e) {
-      try {
-        const content = e.target.result;
-        const parsed = jsyaml.load(content);
-
-        if (parsed.kind === "Secret" && parsed.apiVersion?.startsWith("v1")) {
-          try {
-            validateKubernetesSecret(parsed);
-            currentSecretObj = parsed;
-            updateYamlOutput();
-            renderDecodedFields();
-            hideLoadingNotification();
-            showNotification(`✅ Secret "${parsed.metadata?.name || 'Unnamed'}" loaded successfully!`, "success");
-          } catch (validationError) {
-            hideLoadingNotification();
-            showNotification(`⚠️ ${validationError.message}`, "warning");
-          }
-        } else {
-          hideLoadingNotification();
-          showNotification("⚠️ This YAML is not a valid Kubernetes Secret.", "warning");
-        }
-      } catch (err) {
-        console.error("YAML parsing error:", err);
-        hideLoadingNotification();
-        showNotification(`❌ Failed to parse YAML: ${err.message}`, "danger");
-      }
+      const content = e.target.result;
+      processYamlContent(content, "file");
+      hideLoadingNotification();
     };
 
     reader.readAsText(file);
   });
+
+// YAML paste functionality
+document.getElementById("processYamlBtn").addEventListener("click", () => {
+  const yamlContent = document.getElementById("yamlTextarea").value.trim();
+  
+  if (!yamlContent) {
+    showNotification("⚠️ Please paste some YAML content first", "warning");
+    return;
+  }
+  
+  const loadingNotification = showLoadingNotification("Processing pasted YAML...");
+  
+  // Add small delay for better UX
+  setTimeout(() => {
+    processYamlContent(yamlContent, "paste");
+    hideLoadingNotification();
+  }, 500);
+});
+
+// Clear YAML textarea
+document.getElementById("clearYamlBtn").addEventListener("click", () => {
+  document.getElementById("yamlTextarea").value = "";
+  showNotification("📝 YAML content cleared", "info", 2000);
+});
+
+// Keyboard shortcuts for YAML textarea
+document.getElementById("yamlTextarea").addEventListener("keydown", (e) => {
+  // Ctrl+Enter or Cmd+Enter to process
+  if ((e.ctrlKey || e.metaKey) && e.key === "Enter") {
+    e.preventDefault();
+    document.getElementById("processYamlBtn").click();
+  }
+  
+  // Ctrl+Shift+C or Cmd+Shift+C to clear
+  if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === "C") {
+    e.preventDefault();
+    document.getElementById("clearYamlBtn").click();
+  }
+  
+  // Tab support for better YAML editing
+  if (e.key === "Tab") {
+    e.preventDefault();
+    const start = e.target.selectionStart;
+    const end = e.target.selectionEnd;
+    
+    // Insert 2 spaces (YAML standard)
+    e.target.value = e.target.value.substring(0, start) + "  " + e.target.value.substring(end);
+    e.target.selectionStart = e.target.selectionEnd = start + 2;
+  }
+});
+
+// Auto-resize textarea based on content
+document.getElementById("yamlTextarea").addEventListener("input", (e) => {
+  const textarea = e.target;
+  textarea.style.height = "auto";
+  textarea.style.height = Math.max(150, textarea.scrollHeight) + "px";
+});
+
+// Unified YAML processing function
+function processYamlContent(content, source = "unknown") {
+  try {
+    const parsed = jsyaml.load(content);
+
+    if (parsed.kind === "Secret" && parsed.apiVersion?.startsWith("v1")) {
+      try {
+        validateKubernetesSecret(parsed);
+        currentSecretObj = parsed;
+        updateYamlOutput();
+        renderDecodedFields();
+        
+        // Clear the textarea after successful processing
+        if (source === "paste") {
+          document.getElementById("yamlTextarea").value = "";
+        }
+        
+        const sourceText = source === "file" ? "uploaded" : "pasted";
+        showNotification(`✅ Secret "${parsed.metadata?.name || 'Unnamed'}" ${sourceText} successfully!`, "success");
+      } catch (validationError) {
+        showNotification(`⚠️ ${validationError.message}`, "warning");
+      }
+    } else {
+      showNotification("⚠️ This YAML is not a valid Kubernetes Secret.", "warning");
+    }
+  } catch (err) {
+    console.error("YAML parsing error:", err);
+    showNotification(`❌ Failed to parse YAML: ${err.message}`, "danger");
+  }
+}
 
 // Copy YAML to clipboard
 document.getElementById("copyBtn").addEventListener("click", async () => {
