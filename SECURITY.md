@@ -2,7 +2,7 @@
 
 ## Important Security Notes
 
-⚠️ **WARNING**: This tool processes Kubernetes secrets locally in your browser. For maximum security:
+**WARNING**: This tool processes Kubernetes secrets locally in your browser. For maximum security:
 
 1. **Use only in trusted environments**
 2. **Clear browser data after use** (localStorage contains secret data)

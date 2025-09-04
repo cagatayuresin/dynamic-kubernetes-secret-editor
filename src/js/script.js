@@ -19,11 +19,11 @@ window.addEventListener("DOMContentLoaded", () => {
       // Show restore notification after a brief delay
       setTimeout(() => {
         const secretName = currentSecretObj?.metadata?.name || 'Unnamed Secret';
-        showNotification(`🔄 Restored: ${secretName}`, "info", 3000);
+        showNotification(`Restored: ${secretName}`, "info", 3000);
       }, 1000);
     } catch (e) {
       console.error("Failed to parse saved secret object.");
-      showNotification("⚠️ Failed to restore previous session", "warning");
+      showNotification("Failed to restore previous session", "warning");
     }
   }
 
@@ -111,7 +111,7 @@ document.getElementById("processYamlBtn").addEventListener("click", () => {
   const yamlContent = document.getElementById("yamlTextarea").value.trim();
   
   if (!yamlContent) {
-    showNotification("⚠️ Please paste some YAML content first", "warning");
+    showNotification("Please paste some YAML content first", "warning");
     return;
   }
   
@@ -127,7 +127,7 @@ document.getElementById("processYamlBtn").addEventListener("click", () => {
 // Clear YAML textarea
 document.getElementById("clearYamlBtn").addEventListener("click", () => {
   document.getElementById("yamlTextarea").value = "";
-  showNotification("📝 YAML content cleared", "info", 2000);
+  showNotification("YAML content cleared", "info", 2000);
 });
 
 // Keyboard shortcuts for YAML textarea
@@ -181,16 +181,16 @@ function processYamlContent(content, source = "unknown") {
         }
         
         const sourceText = source === "file" ? "uploaded" : "pasted";
-        showNotification(`✅ Secret "${parsed.metadata?.name || 'Unnamed'}" ${sourceText} successfully!`, "success");
+        showNotification(`Secret "${parsed.metadata?.name || 'Unnamed'}" ${sourceText} successfully!`, "success");
       } catch (validationError) {
-        showNotification(`⚠️ ${validationError.message}`, "warning");
+        showNotification(validationError.message, "warning");
       }
     } else {
-      showNotification("⚠️ This YAML is not a valid Kubernetes Secret.", "warning");
+      showNotification("This YAML is not a valid Kubernetes Secret.", "warning");
     }
   } catch (err) {
     console.error("YAML parsing error:", err);
-    showNotification(`❌ Failed to parse YAML: ${err.message}`, "danger");
+    showNotification(`Failed to parse YAML: ${err.message}`, "danger");
   }
 }
 
@@ -199,13 +199,13 @@ document.getElementById("copyBtn").addEventListener("click", async () => {
   const text = document.getElementById("secretOutput").textContent;
   
   if (!text.trim()) {
-    showNotification("⚠️ No YAML content to copy", "warning");
+    showNotification("No YAML content to copy", "warning");
     return;
   }
 
   try {
     await navigator.clipboard.writeText(text);
-    showNotification("📋 YAML copied to clipboard!", "success", 2000);
+    showNotification("YAML copied to clipboard!", "success", 2000);
   } catch (err) {
     // Fallback for older browsers
     const textArea = document.createElement('textarea');
@@ -214,9 +214,9 @@ document.getElementById("copyBtn").addEventListener("click", async () => {
     textArea.select();
     try {
       document.execCommand('copy');
-      showNotification("📋 YAML copied to clipboard!", "success", 2000);
+      showNotification("YAML copied to clipboard!", "success", 2000);
     } catch (fallbackErr) {
-      showNotification("❌ Failed to copy to clipboard", "danger");
+      showNotification("Failed to copy to clipboard", "danger");
     }
     document.body.removeChild(textArea);
   }
@@ -227,7 +227,7 @@ document.getElementById("downloadBtn").addEventListener("click", () => {
   const yamlText = document.getElementById("secretOutput").textContent;
   
   if (!yamlText.trim()) {
-    showNotification("⚠️ No YAML content to download", "warning");
+    showNotification("No YAML content to download", "warning");
     return;
   }
 
@@ -249,10 +249,10 @@ document.getElementById("downloadBtn").addEventListener("click", () => {
       link.click();
       URL.revokeObjectURL(url);
       hideLoadingNotification();
-      showNotification(`📥 Downloaded: ${filename}`, "success");
+      showNotification(`Downloaded: ${filename}`, "success");
     } catch (err) {
       hideLoadingNotification();
-      showNotification("❌ Failed to download file", "danger");
+      showNotification("Failed to download file", "danger");
     }
   }, 500);
 });
@@ -492,7 +492,7 @@ document.getElementById("clearDataBtn").addEventListener("click", () => {
     document.getElementById("dataInputs").innerHTML = "";
     document.getElementById("yamlInput").value = "";
     confirmDialog.remove();
-    showNotification("🗑️ All data cleared successfully!", "info");
+    showNotification("All data cleared successfully!", "info");
   });
   
   document.getElementById('cancelClear').addEventListener('click', () => {
@@ -530,10 +530,10 @@ document.getElementById("exportConfigBtn").addEventListener("click", () => {
       link.click();
       URL.revokeObjectURL(url);
       hideLoadingNotification();
-      showNotification(`📤 Configuration exported: ${filename}`, "success");
+      showNotification(`Configuration exported: ${filename}`, "success");
     } catch (err) {
       hideLoadingNotification();
-      showNotification("❌ Failed to export configuration", "danger");
+      showNotification("Failed to export configuration", "danger");
     }
   }, 800);
 });

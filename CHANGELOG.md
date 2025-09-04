@@ -7,9 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.0.0] - 2025-09-04
 
-### 🎉 Major Release - Complete UI/UX Overhaul
+### Major Release - Complete UI/UX Overhaul
 
-### ✨ Added
+### Added
 - **YAML Paste Area** - Users can now paste YAML content directly instead of uploading files
 - **Modern Notification System** - Beautiful toast notifications with gradients and icons
 - **Enhanced File Upload** - Redesigned upload button with gradient styling and animations
@@ -23,7 +23,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Enhanced Error Handling** - Better error messages and validation
 - **Dark Mode Improvements** - Better contrast and styling for dark theme
 
-### 🎨 Improved
+### Improved
 - **Typography** - Added Orbitron font for main title, Inter for body text
 - **Main Title** - Now in ALL CAPS with gradient colors and tech styling
 - **Icon System** - Migrated from Font Awesome to Tabler Icons for modern look
@@ -33,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Color Scheme** - More vibrant gradients and better contrast
 - **Responsive Design** - Better mobile experience
 
-### 🔧 Technical Improvements
+### Technical Improvements
 - **Unified YAML Processing** - Single function handles both file upload and paste
 - **Better State Management** - Improved localStorage handling
 - **Enhanced Validation** - More comprehensive Kubernetes Secret validation
@@ -41,7 +41,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Performance** - Optimized animations and transitions
 - **Accessibility** - Better keyboard navigation and screen reader support
 
-### 🐛 Fixed
+### Fixed
 - **Icon Loading Issues** - Stable CDN for Tabler Icons
 - **Theme Switching** - Improved dark/light mode transitions
 - **Notification Positioning** - Better responsive positioning
