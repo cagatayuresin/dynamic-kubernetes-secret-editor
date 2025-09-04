@@ -30,13 +30,21 @@
     <meta name="twitter:image" content="src/img/preview.png">
     <meta name="twitter:creator" content="@cagatayuresin">
 
-    <!-- Favicon -->
-    <link rel="icon" href="src/img/favicon.ico" type="image/x-icon">
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="src/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="src/img/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="src/img/favicon.ico">
+
+    <!-- Google Fonts - Orbitron for futuristic tech look -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <!-- Bulma CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <!-- Font Awesome -->
-    <script src="https://kit.fontawesome.com/4ed1a77e89.js" crossorigin="anonymous"></script>
+    <!-- Tabler Icons - Webfont version (most reliable) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
     <!-- Highlight.js -->
     <link id="yamlTheme" rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nnfx-light.min.css">
@@ -53,7 +61,10 @@
         <div class="container">
             <div class="level">
                 <div class="level-left">
-                    <h1 class="title is-4">🔐 Dynamic Kubernetes Secret Editor</h1>
+                    <h1 class="title is-3 main-title">
+                        <i class="ti ti-lock-code"></i>
+                        DYNAMIC KUBERNETES SECRET EDITOR
+                    </h1>
                 </div>
             </div>
 
@@ -62,7 +73,7 @@
                 <label class="file-label">
                     <input class="file-input" type="file" id="yamlInput" accept=".yaml,.yml">
                     <span class="file-cta">
-                        <span class="file-icon"><i class="fas fa-upload"></i></span>
+                        <span class="file-icon"><i class="ti ti-upload"></i></span>
                         <span class="file-label">Upload YAML File</span>
                     </span>
                 </label>
@@ -73,11 +84,11 @@
                 <h2 class="title is-6">Data Management</h2>
                 <div class="buttons is-centered">
                     <button class="button is-warning" id="clearDataBtn">
-                        <span class="icon"><i class="fas fa-trash"></i></span>
+                        <span class="icon"><i class="ti ti-trash"></i></span>
                         <span>Clear All Data</span>
                     </button>
                     <button class="button is-info" id="exportConfigBtn">
-                        <span class="icon"><i class="fas fa-file-export"></i></span>
+                        <span class="icon"><i class="ti ti-file-export"></i></span>
                         <span>Export Config</span>
                     </button>
                 </div>
@@ -85,15 +96,15 @@
 
             <!-- YAML Preview -->
             <div class="box">
-                <label class="label">YAML Preview</label>
+                <h3 class="label">YAML Preview</h3>
                 <pre><code id="secretOutput" class="yaml hljs"></code></pre>
                 <div class="buttons is-centered mt-4">
                     <button class="button is-info" id="copyBtn">
-                        <span class="icon"><i class="fas fa-copy"></i></span>
+                        <span class="icon"><i class="ti ti-copy"></i></span>
                         <span>Copy</span>
                     </button>
                     <button class="button is-success" id="downloadBtn">
-                        <span class="icon"><i class="fas fa-download"></i></span>
+                        <span class="icon"><i class="ti ti-download"></i></span>
                         <span>Download</span>
                     </button>
                 </div>
@@ -110,10 +121,10 @@
     <!-- Floating Buttons: Back to Top + Theme Toggle -->
     <div id="floatingButtons">
         <button id="backToTopBtn" title="Back to top">
-            <i class="fas fa-arrow-up"></i>
+            <i class="ti ti-arrow-up"></i>
         </button>
         <button id="toggleThemeBtn" title="Toggle theme">
-            <i id="themeIcon" class="fas fa-moon"></i>
+            <i id="themeIcon" class="ti ti-moon"></i>
         </button>
     </div>
     <!-- Footer -->
@@ -122,10 +133,10 @@
             <div id="imagePlaceholder"></div>
             <p class="footer-icons" style="margin-top: 10px">
                 <a href="https://github.com/cagatayuresin" target="_blank" title="My GitHub Profile">
-                    <i id="github" class="fab fa-github fa-2x"></i>
+                    <i id="github" class="ti ti-brand-github" style="font-size: 2rem;"></i>
                 </a>
                 <a href="https://www.linkedin.com/in/cagatayuresin/" target="_blank" title="My LinkedIn Profile">
-                    <i id="linkedin" class="fab fa-linkedin fa-2x"></i>
+                    <i id="linkedin" class="ti ti-brand-linkedin" style="font-size: 2rem;"></i>
                 </a>
             </p>
             <p class="footer-text small">

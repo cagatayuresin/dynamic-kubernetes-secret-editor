@@ -168,14 +168,14 @@ function applyTheme(mode) {
   if (mode === "dark") {
     document.body.classList.add("dark-mode");
     document.body.classList.remove("light-mode");
-    themeIcon.className = "fas fa-sun";
+    themeIcon.className = "ti ti-sun";
     localStorage.setItem("theme", "dark");
     imgElement.src = "src/img/cagatayuresin-logo-w.png";
     yamlTheme.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nnfx-dark.min.css";
   } else {
     document.body.classList.remove("dark-mode");
     document.body.classList.add("light-mode");
-    themeIcon.className = "fas fa-moon";
+    themeIcon.className = "ti ti-moon";
     localStorage.setItem("theme", "light");
     imgElement.src = "src/img/cagatayuresin-logo.png";
     yamlTheme.href = "https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nnfx-light.min.css";
