@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://cagatayuresin.github.io/dynamic-kubernetes-secret-editor/sitemap.xml
+
+# Block access to source files that shouldn't be indexed
+Disallow: /src/
+Disallow: /*.yaml
+Disallow: /*.yml
+Disallow: /*.json

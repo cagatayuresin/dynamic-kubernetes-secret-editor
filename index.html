@@ -6,18 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Dynamic Kubernetes Secret Editor | Simplify Secret Management</title>
     <meta name="description"
-        content="Dynamic Kubernetes Secret Editor is a powerful tool to decode, edit, and manage Kubernetes secrets with ease. Upload YAML files, preview, and download updated secrets.">
+        content="Dynamic Kubernetes Secret Editor - Powerful tool to decode, edit, and manage Kubernetes secrets with ease. Upload YAML files, preview, and download updated secrets by Cagatay URESIN.">
     <meta name="keywords"
-        content="Kubernetes, Secret Editor, YAML, Base64 Decode, Kubernetes Secrets, Kubernetes Tools, YAML Editor">
-    <meta name="author" content="Çağatay Üresin">
+        content="Kubernetes, Secret Editor, YAML, Base64 Decode, Kubernetes Secrets, Kubernetes Tools, YAML Editor, DevOps, Container Management">
+    <meta name="author" content="Cagatay URESIN">
+    <meta name="contact" content="cagatayuresin@gmail.com">
     <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://cagatayuresin.me/dynamic-kubernetes-secret-editor">
 
     <!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
     <meta property="og:title" content="Dynamic Kubernetes Secret Editor | Simplify Secret Management">
     <meta property="og:description"
         content="Easily decode, edit, and manage Kubernetes secrets with this intuitive web-based tool. Upload YAML files, preview changes, and download updated secrets.">
-    <meta property="og:image" content="src/img/preview.png">
-    <meta property="og:url" content="https://cagatayuresin.com/dynamic-kubernetes-secret-editor">
+    <meta property="og:image" content="https://cagatayuresin.me/dynamic-kubernetes-secret-editor/src/img/preview.png">
+    <meta property="og:url" content="https://cagatayuresin.me/dynamic-kubernetes-secret-editor">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_US">
     <meta property="og:site_name" content="Dynamic Kubernetes Secret Editor">
@@ -27,8 +29,48 @@
     <meta name="twitter:title" content="Dynamic Kubernetes Secret Editor | Simplify Secret Management">
     <meta name="twitter:description"
         content="Easily decode, edit, and manage Kubernetes secrets with this intuitive web-based tool.">
-    <meta name="twitter:image" content="src/img/preview.png">
+    <meta name="twitter:image" content="https://cagatayuresin.me/dynamic-kubernetes-secret-editor/src/img/preview.png">
     <meta name="twitter:creator" content="@cagatayuresin">
+    <meta name="twitter:site" content="@cagatayuresin">
+
+    <!-- Additional SEO Meta Tags -->
+    <meta name="application-name" content="Dynamic Kubernetes Secret Editor">
+    <meta name="msapplication-TileColor" content="#667eea">
+    <meta name="theme-color" content="#667eea">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Dynamic Kubernetes Secret Editor",
+      "description": "Web-based tool to decode, edit, and manage Kubernetes secrets with ease. Upload YAML files, preview changes, and download updated secrets.",
+      "url": "https://cagatayuresin.me/dynamic-kubernetes-secret-editor",
+      "author": {
+        "@type": "Person",
+        "name": "Cagatay URESIN",
+        "email": "cagatayuresin@gmail.com",
+        "url": "https://cagatayuresin.me"
+      },
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web Browser",
+      "softwareVersion": "2.0.0",
+      "datePublished": "2024-01-01",
+      "dateModified": "2025-09-04",
+      "license": "https://opensource.org/licenses/MIT",
+      "programmingLanguage": "JavaScript",
+      "screenshot": "https://cagatayuresin.me/dynamic-kubernetes-secret-editor/src/img/preview.png",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD",
+        "availability": "https://schema.org/InStock"
+      }
+    }
+    </script>
 
     <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
@@ -69,14 +111,18 @@
             </div>
 
             <!-- File Upload -->
-            <div class="file is-boxed is-centered mb-4">
-                <label class="file-label">
-                    <input class="file-input" type="file" id="yamlInput" accept=".yaml,.yml">
-                    <span class="file-cta">
-                        <span class="file-icon"><i class="ti ti-upload"></i></span>
-                        <span class="file-label">Upload YAML File</span>
-                    </span>
-                </label>
+            <div class="field mb-4">
+                <div class="control has-text-centered">
+                    <div class="file is-boxed">
+                        <label class="file-label">
+                            <input class="file-input" type="file" id="yamlInput" accept=".yaml,.yml">
+                            <span class="file-cta">
+                                <span class="file-icon"><i class="ti ti-upload"></i></span>
+                                <span class="file-label">Upload YAML File</span>
+                            </span>
+                        </label>
+                    </div>
+                </div>
             </div>
 
             <!-- OR Divider -->
@@ -119,27 +165,16 @@ data:
                         <span class="icon"><i class="ti ti-eraser"></i></span>
                         <span>Clear</span>
                     </button>
+                    <button class="button is-warning" id="clearDataBtn" title="Clear all stored data">
+                        <span class="icon"><i class="ti ti-trash"></i></span>
+                        <span>Clear All Data</span>
+                    </button>
                 </div>
                 <div class="has-text-centered">
                     <small class="help is-grey">
                         <i class="ti ti-info-circle"></i>
                         <strong>Shortcuts:</strong> Ctrl+Enter to process • Ctrl+Shift+C to clear • Tab for indentation
                     </small>
-                </div>
-            </div>
-
-            <!-- Data Management Tools -->
-            <div class="box">
-                <h2 class="title is-6">Data Management</h2>
-                <div class="buttons is-centered">
-                    <button class="button is-warning" id="clearDataBtn">
-                        <span class="icon"><i class="ti ti-trash"></i></span>
-                        <span>Clear All Data</span>
-                    </button>
-                    <button class="button is-info" id="exportConfigBtn">
-                        <span class="icon"><i class="ti ti-file-export"></i></span>
-                        <span>Export Config</span>
-                    </button>
                 </div>
             </div>
 
@@ -190,7 +225,7 @@ data:
             </p>
             <p class="footer-text small">
                 <strong class="strong">Dynamic Kubernetes Secret Editor</strong> by
-                <a href="https://cagatayuresin.com" target="_blank">Çağatay Üresin</a>. The source code is licensed
+                <a href="https://cagatayuresin.me" target="_blank">Cagatay URESIN</a>. The source code is licensed
                 <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.
             </p>
             <p class="footer-version" style="margin-top: 8px;">
@@ -204,6 +239,14 @@ data:
                    style="margin-left: 8px;">
                     <i class="ti ti-file-text"></i>
                     <span style="margin-left: 4px;">Changelog</span>
+                </a>
+                <a href="https://github.com/cagatayuresin/dynamic-kubernetes-secret-editor/blob/main/SECURITY.md" 
+                   target="_blank" 
+                   class="tag is-warning is-light" 
+                   style="margin-left: 8px;"
+                   title="Security Guidelines">
+                    <i class="ti ti-shield-check"></i>
+                    <span style="margin-left: 4px;">Security</span>
                 </a>
             </p>
         </div>

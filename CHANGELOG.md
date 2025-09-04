@@ -1,15 +1,11 @@
 # Changelog
 
-All notable changes to this project will be documented in this file.
-
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
-
 ## [2.0.0] - 2025-09-04
 
 ### Major Release - Complete UI/UX Overhaul
 
 ### Added
+
 - **YAML Paste Area** - Users can now paste YAML content directly instead of uploading files
 - **Modern Notification System** - Beautiful toast notifications with gradients and icons
 - **Enhanced File Upload** - Redesigned upload button with gradient styling and animations
@@ -24,6 +20,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Dark Mode Improvements** - Better contrast and styling for dark theme
 
 ### Improved
+
 - **Typography** - Added Orbitron font for main title, Inter for body text
 - **Main Title** - Now in ALL CAPS with gradient colors and tech styling
 - **Icon System** - Migrated from Font Awesome to Tabler Icons for modern look
@@ -34,6 +31,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Responsive Design** - Better mobile experience
 
 ### Technical Improvements
+
 - **Unified YAML Processing** - Single function handles both file upload and paste
 - **Better State Management** - Improved localStorage handling
 - **Enhanced Validation** - More comprehensive Kubernetes Secret validation
@@ -42,6 +40,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Accessibility** - Better keyboard navigation and screen reader support
 
 ### Fixed
+
 - **Icon Loading Issues** - Stable CDN for Tabler Icons
 - **Theme Switching** - Improved dark/light mode transitions
 - **Notification Positioning** - Better responsive positioning
@@ -50,9 +49,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ---
 
-## [1.0.0] - 2024-XX-XX
+## [1.0.0] - 2025-03-31
 
 ### Initial Release
+
 - Basic YAML file upload functionality
 - Base64 decode/encode for Kubernetes secrets
 - Real-time YAML preview with syntax highlighting
@@ -66,11 +66,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Development Guidelines
 
 ### Version Numbering
+
 - **Major (X.0.0)** - Breaking changes or major feature additions
 - **Minor (X.Y.0)** - New features, backward compatible
 - **Patch (X.Y.Z)** - Bug fixes, backward compatible
 
 ### Change Categories
+
 - `Added` for new features
 - `Changed` for changes in existing functionality
 - `Deprecated` for soon-to-be removed features
