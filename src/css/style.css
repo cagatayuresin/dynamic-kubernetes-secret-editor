@@ -100,3 +100,71 @@ body.dark-mode .footer-icons a {
   color: #0077b5;
   text-shadow: #0077b5 0 0 1px;
 }
+
+/* Improved file upload styling */
+.file.is-boxed .file-cta {
+  transition: all 0.3s ease;
+}
+
+.file.is-boxed:hover .file-cta {
+  background-color: #3273dc;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+body.dark-mode .file.is-boxed:hover .file-cta {
+  background-color: #485fc7;
+}
+
+/* Improved button styling */
+.button {
+  transition: all 0.3s ease;
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Field spacing */
+.field + .field {
+  margin-top: 1rem;
+}
+
+/* Responsive improvements */
+@media (max-width: 768px) {
+  #floatingButtons {
+    bottom: 16px;
+    right: 16px;
+  }
+  
+  #floatingButtons button {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  
+  .container {
+    padding: 0 1rem;
+  }
+}
+
+/* Loading state */
+.is-loading::after {
+  animation: spinAround 500ms infinite linear;
+  border: 2px solid #dbdbdb;
+  border-radius: 50%;
+  border-right-color: transparent;
+  border-top-color: transparent;
+  content: "";
+  display: block;
+  height: 1em;
+  position: relative;
+  width: 1em;
+}
+
+@keyframes spinAround {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(359deg); }
+}

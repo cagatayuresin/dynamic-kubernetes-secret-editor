@@ -17,10 +17,15 @@ Check out the live demo here: [Dynamic Kubernetes Secret Editor](https://cagatay
 
 - **YAML File Upload**: Upload Kubernetes secret YAML files for editing.
 - **Base64 Decoding**: Automatically decode Base64-encoded secret values for easy editing.
-- **YAML Preview**: View the updated YAML in real-time.
-- **Download Updated Secrets**: Save the modified secrets as a YAML file.
+- **YAML Preview**: View the updated YAML in real-time with syntax highlighting.
+- **Download Updated Secrets**: Save the modified secrets as a YAML file with smart naming.
 - **Theme Toggle**: Switch between light and dark modes for better usability.
 - **Persistent State**: Automatically saves your work in `localStorage` for later use.
+- **Smart Notifications**: User-friendly notifications instead of browser alerts.
+- **Data Management**: Clear stored data and export configuration.
+- **Input Validation**: Comprehensive validation for Kubernetes Secret format.
+- **Security Focused**: All processing happens locally in the browser.
+- **Responsive Design**: Works seamlessly on desktop and mobile devices.
 
 ---
 
