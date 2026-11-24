@@ -224,15 +224,39 @@ export function updateMetadata(model: SecretModel, patch: MetadataPatch): Secret
 }
 
 export function downloadFilename(name: string, now = new Date()): string {
-  const slug = name
-    .trim()
-    .toLowerCase()
-    .replace(/[^a-z0-9.-]+/g, '-')
-    .replace(/^[-.]+/, '')
-    .replace(/[-.]+$/, '')
-    .replace(/-{2,}/g, '-') || 'secret';
+  const slug = slugify(name) || 'secret';
   const day = now.toISOString().slice(0, 10);
   return `${slug}-${day}.yaml`;
+}
+
+function slugify(name: string): string {
+  let slug = '';
+  let previousDash = false;
+  for (const char of name.trim().toLowerCase()) {
+    const keep = (char >= 'a' && char <= 'z') || (char >= '0' && char <= '9') || char === '.';
+    if (keep) {
+      slug += char;
+      previousDash = false;
+      continue;
+    }
+    if (slug.length > 0 && !previousDash) {
+      slug += '-';
+      previousDash = true;
+    }
+  }
+  let start = 0;
+  let end = slug.length;
+  while (start < end && isDashOrDot(slug[start])) {
+    start += 1;
+  }
+  while (end > start && isDashOrDot(slug[end - 1])) {
+    end -= 1;
+  }
+  return slug.slice(start, end);
+}
+
+function isDashOrDot(char: string | undefined): boolean {
+  return char === '-' || char === '.';
 }
 
 function finish(model: SecretModel): SecretModel {

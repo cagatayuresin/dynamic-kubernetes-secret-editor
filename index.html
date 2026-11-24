@@ -51,8 +51,7 @@
             theme = 'dark';
           }
         } catch (error) {
-          // Private browsing can block localStorage. The light theme stays.
-          theme = 'light';
+          // Private browsing can block localStorage. The light theme set above stays.
         }
         document.documentElement.dataset.theme = theme;
       })();
