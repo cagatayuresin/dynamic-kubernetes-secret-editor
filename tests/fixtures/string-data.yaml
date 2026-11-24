@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: merged
+type: Opaque
+data:
+  username: dXNlcg==
+  blob: "/w=="
+stringData:
+  username: replaced
+  note: hello

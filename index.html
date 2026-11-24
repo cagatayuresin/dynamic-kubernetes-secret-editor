@@ -1,259 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Dynamic Kubernetes Secret Editor | Simplify Secret Management</title>
-    <meta name="description"
-        content="Dynamic Kubernetes Secret Editor - Powerful tool to decode, edit, and manage Kubernetes secrets with ease. Upload YAML files, preview, and download updated secrets by Cagatay URESIN.">
-    <meta name="keywords"
-        content="Kubernetes, Secret Editor, YAML, Base64 Decode, Kubernetes Secrets, Kubernetes Tools, YAML Editor, DevOps, Container Management">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Kubernetes Secret Editor</title>
+    <meta name="description" content="Decode, edit, and export Kubernetes Secrets in the browser. Files stay on your machine.">
     <meta name="author" content="Cagatay URESIN">
-    <meta name="contact" content="cagatayuresin@gmail.com">
     <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://cagatayuresin.me/dynamic-kubernetes-secret-editor">
-
-    <!-- Open Graph Meta Tags (Facebook, LinkedIn) -->
-    <meta property="og:title" content="Dynamic Kubernetes Secret Editor | Simplify Secret Management">
-    <meta property="og:description"
-        content="Easily decode, edit, and manage Kubernetes secrets with this intuitive web-based tool. Upload YAML files, preview changes, and download updated secrets.">
-    <meta property="og:image" content="https://cagatayuresin.me/dynamic-kubernetes-secret-editor/src/img/preview.png">
-    <meta property="og:url" content="https://cagatayuresin.me/dynamic-kubernetes-secret-editor">
+    <meta name="theme-color" content="#3f72af">
+    <link rel="canonical" href="https://cagatayuresin.github.io/dynamic-kubernetes-secret-editor/">
+    <link rel="icon" href="%BASE_URL%favicon.svg" type="image/svg+xml">
+    <meta property="og:title" content="Dynamic Kubernetes Secret Editor">
+    <meta property="og:description" content="Decode, edit, and export Kubernetes Secrets in the browser. Files stay on your machine.">
+    <meta property="og:url" content="https://cagatayuresin.github.io/dynamic-kubernetes-secret-editor/">
     <meta property="og:type" content="website">
     <meta property="og:locale" content="en_US">
-    <meta property="og:site_name" content="Dynamic Kubernetes Secret Editor">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Dynamic Kubernetes Secret Editor | Simplify Secret Management">
-    <meta name="twitter:description"
-        content="Easily decode, edit, and manage Kubernetes secrets with this intuitive web-based tool.">
-    <meta name="twitter:image" content="https://cagatayuresin.me/dynamic-kubernetes-secret-editor/src/img/preview.png">
-    <meta name="twitter:creator" content="@cagatayuresin">
-    <meta name="twitter:site" content="@cagatayuresin">
-
-    <!-- Additional SEO Meta Tags -->
-    <meta name="application-name" content="Dynamic Kubernetes Secret Editor">
-    <meta name="msapplication-TileColor" content="#667eea">
-    <meta name="theme-color" content="#667eea">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="default">
-
-    <!-- Structured Data for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SoftwareApplication",
-      "name": "Dynamic Kubernetes Secret Editor",
-      "description": "Web-based tool to decode, edit, and manage Kubernetes secrets with ease. Upload YAML files, preview changes, and download updated secrets.",
-      "url": "https://cagatayuresin.me/dynamic-kubernetes-secret-editor",
-      "author": {
-        "@type": "Person",
-        "name": "Cagatay URESIN",
-        "email": "cagatayuresin@gmail.com",
-        "url": "https://cagatayuresin.me"
-      },
-      "applicationCategory": "DeveloperApplication",
-      "operatingSystem": "Web Browser",
-      "softwareVersion": "2.0.0",
-      "datePublished": "2024-01-01",
-      "dateModified": "2025-09-04",
-      "license": "https://opensource.org/licenses/MIT",
-      "programmingLanguage": "JavaScript",
-      "screenshot": "https://cagatayuresin.me/dynamic-kubernetes-secret-editor/src/img/preview.png",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "USD",
-        "availability": "https://schema.org/InStock"
-      }
-    }
-    </script>
-
-    <!-- Favicons -->
-    <link rel="icon" type="image/x-icon" href="src/img/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="src/img/favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="src/img/favicon.ico">
-    <link rel="icon" type="image/png" sizes="16x16" href="src/img/favicon.ico">
-
-    <!-- Google Fonts - Orbitron for futuristic tech look -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Dynamic Kubernetes Secret Editor">
+    <meta name="twitter:description" content="Decode, edit, and export Kubernetes Secrets in the browser. Files stay on your machine.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-
-    <!-- Bulma CSS -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
-    <!-- Tabler Icons - Webfont version (most reliable) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-    <!-- Highlight.js -->
-    <link id="yamlTheme" rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/nnfx-light.min.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/languages/yaml.min.js"></script>
-    <!-- Custom Styles -->
-    <link rel="stylesheet" href="src/css/style.css">
-</head>
-
-<body class="light-mode">
-
-    <!-- Top Section -->
-    <section class="section py-5">
-        <div class="container">
-            <div class="level">
-                <div class="level-left">
-                    <h1 class="title is-3 main-title">
-                        <i class="ti ti-lock-code"></i>
-                        DYNAMIC KUBERNETES SECRET EDITOR
-                    </h1>
-                </div>
-            </div>
-
-            <!-- File Upload -->
-            <div class="field mb-4">
-                <div class="control has-text-centered">
-                    <div class="file is-boxed">
-                        <label class="file-label">
-                            <input class="file-input" type="file" id="yamlInput" accept=".yaml,.yml">
-                            <span class="file-cta">
-                                <span class="file-icon"><i class="ti ti-upload"></i></span>
-                                <span class="file-label">Upload YAML File</span>
-                            </span>
-                        </label>
-                    </div>
-                </div>
-            </div>
-
-            <!-- OR Divider -->
-            <div class="has-text-centered mb-4">
-                <span class="tag is-light is-medium">OR</span>
-            </div>
-
-            <!-- Paste YAML Area -->
-            <div class="box mb-4">
-                <h3 class="label">
-                    <i class="ti ti-clipboard"></i>
-                    Paste YAML Content
-                </h3>
-                <div class="field">
-                    <div class="control">
-                        <textarea 
-                            class="textarea" 
-                            id="yamlTextarea" 
-                            placeholder="Paste your Kubernetes Secret YAML here...
-Example:
-apiVersion: v1
-kind: Secret
-metadata:
-  name: my-secret
-type: Opaque
-data:
-  username: dXNlcm5hbWU=
-  password: cGFzc3dvcmQ="
-                            rows="8"
-                            style="font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.9rem;"
-                        ></textarea>
-                    </div>
-                </div>
-                <div class="buttons is-centered">
-                    <button class="button is-primary" id="processYamlBtn">
-                        <span class="icon"><i class="ti ti-player-play"></i></span>
-                        <span>Process YAML</span>
-                    </button>
-                    <button class="button is-light" id="clearYamlBtn">
-                        <span class="icon"><i class="ti ti-eraser"></i></span>
-                        <span>Clear</span>
-                    </button>
-                    <button class="button is-warning" id="clearDataBtn" title="Clear all stored data">
-                        <span class="icon"><i class="ti ti-trash"></i></span>
-                        <span>Clear All Data</span>
-                    </button>
-                </div>
-                <div class="has-text-centered">
-                    <small class="help is-grey">
-                        <i class="ti ti-info-circle"></i>
-                        <strong>Shortcuts:</strong> Ctrl+Enter to process • Ctrl+Shift+C to clear • Tab for indentation
-                    </small>
-                </div>
-            </div>
-
-            <!-- YAML Preview -->
-            <div class="box">
-                <h3 class="label">YAML Preview</h3>
-                <pre><code id="secretOutput" class="yaml hljs"></code></pre>
-                <div class="buttons is-centered mt-4">
-                    <button class="button is-info" id="copyBtn">
-                        <span class="icon"><i class="ti ti-copy"></i></span>
-                        <span>Copy</span>
-                    </button>
-                    <button class="button is-success" id="downloadBtn">
-                        <span class="icon"><i class="ti ti-download"></i></span>
-                        <span>Download</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Decoded Base64 Input Fields -->
-            <div class="box" id="dataInputsBox">
-                <h2 class="title is-5">Decoded Data Fields</h2>
-                <div id="dataInputs" class="mt-3"></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Floating Buttons: Back to Top + Theme Toggle -->
-    <div id="floatingButtons">
-        <button id="backToTopBtn" title="Back to top">
-            <i class="ti ti-arrow-up"></i>
-        </button>
-        <button id="toggleThemeBtn" title="Toggle theme">
-            <i id="themeIcon" class="ti ti-moon"></i>
-        </button>
-    </div>
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="content has-text-centered">
-            <div id="imagePlaceholder"></div>
-            <p class="footer-icons" style="margin-top: 10px">
-                <a href="https://github.com/cagatayuresin" target="_blank" title="My GitHub Profile">
-                    <i id="github" class="ti ti-brand-github" style="font-size: 2rem;"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/cagatayuresin/" target="_blank" title="My LinkedIn Profile">
-                    <i id="linkedin" class="ti ti-brand-linkedin" style="font-size: 2rem;"></i>
-                </a>
-            </p>
-            <p class="footer-text small">
-                <strong class="strong">Dynamic Kubernetes Secret Editor</strong> by
-                <a href="https://cagatayuresin.me" target="_blank">Cagatay URESIN</a>. The source code is licensed
-                <a href="http://opensource.org/licenses/mit-license.php" target="_blank">MIT</a>.
-            </p>
-            <p class="footer-version" style="margin-top: 8px;">
-                <span class="tag is-info is-light">
-                    <i class="ti ti-tag"></i>
-                    <span style="margin-left: 4px;">Version 2.0.0</span>
-                </span>
-                <a href="https://github.com/cagatayuresin/dynamic-kubernetes-secret-editor/blob/main/CHANGELOG.md" 
-                   target="_blank" 
-                   class="tag is-link is-light" 
-                   style="margin-left: 8px;">
-                    <i class="ti ti-file-text"></i>
-                    <span style="margin-left: 4px;">Changelog</span>
-                </a>
-                <a href="https://github.com/cagatayuresin/dynamic-kubernetes-secret-editor/blob/main/SECURITY.md" 
-                   target="_blank" 
-                   class="tag is-warning is-light" 
-                   style="margin-left: 8px;"
-                   title="Security Guidelines">
-                    <i class="ti ti-shield-check"></i>
-                    <span style="margin-left: 4px;">Security</span>
-                </a>
-            </p>
-        </div>
-    </footer>
-    <!-- Dependencies -->
-    <script src="https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js"></script>
-    <script src="src/js/script.js"></script>
-</body>
-
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Dynamic Kubernetes Secret Editor",
+        "description": "Browser-local editor that decodes, edits, and exports Kubernetes Secrets.",
+        "url": "https://cagatayuresin.github.io/dynamic-kubernetes-secret-editor/",
+        "softwareVersion": "1.0.0",
+        "applicationCategory": "DeveloperApplication",
+        "operatingSystem": "Web Browser",
+        "license": "https://opensource.org/licenses/MIT",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
+        "author": {
+          "@type": "Person",
+          "name": "Cagatay URESIN",
+          "url": "https://cagatayuresin.com"
+        }
+      }
+    </script>
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var theme = saved === 'light' || saved === 'dark'
+            ? saved
+            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+          document.documentElement.dataset.theme = theme;
+        } catch (error) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
 </html>

@@ -1,167 +1,67 @@
-# 🔐 Dynamic Kubernetes Secret Editor
+# Dynamic Kubernetes Secret Editor
 
-[![Live Demo](https://img.shields.io/badge/Demo-Live-blue?style=flat-square)](https://cagatayuresin.github.io/dynamic-kubernetes-secret-editor/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=flat-square)](https://opensource.org/licenses/MIT)
-[![Issues](https://img.shields.io/github/issues/cagatayuresin/dynamic-kubernetes-secret-editor?style=flat-square)](https://github.com/cagatayuresin/dynamic-kubernetes-secret-editor/issues)
-[![Stars](https://img.shields.io/github/stars/cagatayuresin/dynamic-kubernetes-secret-editor?style=flat-square)](https://github.com/cagatayuresin/dynamic-kubernetes-secret-editor/stargazers)
+A browser editor for Kubernetes Secrets. Paste or drop a Secret YAML, edit the decoded values, and copy or download the result. Nothing is uploaded. The published site is a static build; the Vite dev server is only for local work.
 
-🚀 **Dynamic Kubernetes Secret Editor** is a modern web-based tool designed to simplify the management of Kubernetes secrets. It allows you to upload, decode, edit, and download Kubernetes secrets in YAML format with ease. This tool is perfect for developers and DevOps engineers who frequently work with Kubernetes secrets.
+**Version 1.0.0**
 
-## 🌐 Live Demo
+## Features
 
-Check out the live demo here: [Dynamic Kubernetes Secret Editor](https://cagatayuresin.github.io/dynamic-kubernetes-secret-editor/)
+- File upload, drag and drop, paste, and a built-in example
+- UTF-8 Base64 decode and encode, including multiline values
+- `stringData` is merged on import; export writes canonical `data`
+- Values that are not valid UTF-8 stay read-only Base64
+- Add, rename, and remove keys
+- Name, namespace, and Secret type, with a hint when a known type is missing its usual keys
+- Light and dark theme, responsive layout, and a live YAML preview
+- Theme preference only is stored. Secret contents are not
 
----
+## Local development
 
-## ✨ Features
+Requires Node.js 22 or newer.
 
-- 📁 **Dual Input Methods** - Upload YAML files OR paste YAML content directly
-- 🔓 **Base64 Decoding** - Automatically decode Base64-encoded secret values for easy editing
-- 👀 **Real-time YAML Preview** - View the updated YAML with beautiful syntax highlighting
-- 💾 **Smart File Downloads** - Save modified secrets with intelligent naming (includes timestamp)
-- 🎨 **Modern UI/UX** - Beautiful gradient design with Tabler Icons and Orbitron fonts
-- 🌙 **Theme Toggle** - Switch between light and dark modes with smooth transitions
-- 💾 **Persistent State** - Automatically saves your work in localStorage for later use
-- 🔔 **Toast Notifications** - Beautiful notifications with progress bars and icons
-- ⌨️ **Keyboard Shortcuts** - Ctrl+Enter to process, Ctrl+Shift+C to clear, Tab for indentation
-- ⏳ **Loading States** - Visual feedback during all operations
-- 🧹 **Data Management** - Clear stored data with confirmation dialogs
-- ✅ **Enhanced Validation** - Comprehensive validation for Kubernetes Secret format
-- 🔒 **Security Focused** - All processing happens locally in the browser
-- 📱 **Responsive Design** - Works seamlessly on desktop and mobile devices
-- 🔧 **Progressive Enhancement** - Fallback support for older browsers
+```bash
+npm install
+npm run dev
+```
 
----
+Open the URL Vite prints. `npm run build` writes a static site to `dist/`. You can open `dist/index.html` or run `npm run preview` to check that build. GitHub Pages serves the same `dist/` output. It does not run a Node server.
 
-## 🛠️ Technologies Used
+```bash
+npm test
+npm run lint
+```
 
-- **Frontend**: HTML5, CSS3 (Bulma framework, custom styles), JavaScript ES6+
-- **Libraries**:
-  - 📝 [js-yaml](https://github.com/nodeca/js-yaml) for YAML parsing and stringifying
-  - 🎨 [Highlight.js](https://highlightjs.org/) for syntax highlighting
-  - 🎯 [Tabler Icons](https://tabler-icons.io/) for modern iconography
-  - 🖼️ [Google Fonts](https://fonts.google.com/) (Orbitron & Inter) for typography
-- **Framework**: 💻 [Bulma CSS](https://bulma.io/) for responsive design
-- **Hosting**: 🐙 GitHub Pages
+Tests fail when line, branch, function, or statement coverage drops below 80%.
 
----
+The sample manifest is [`test-secret.yaml`](test-secret.yaml). The editor can also load it from **Load example**.
 
-## 📦 Installation
+## Usage
 
-To run the project locally, follow these steps:
+1. Drop a Secret YAML, choose a file, paste one, or load the example.
+2. Process the draft. Ctrl+Enter and Cmd+Enter do the same thing.
+3. Edit decoded values. Masked fields can be shown per key.
+4. Copy the preview or download `name-YYYY-MM-DD.yaml`.
 
-1. Clone the repository:
+On a narrow screen the preview stacks under the editor. On a wide screen it stays beside it.
 
-   ```bash
-   git clone https://github.com/cagatayuresin/dynamic-kubernetes-secret-editor.git
-   ```
+## Versioning
 
-2. Navigate to the project directory:
+This repository starts at 1.0.0. Update `package.json` and add a matching section to [CHANGELOG.md](CHANGELOG.md). Pushing a tag such as `v1.0.0` publishes a GitHub Release.
 
-   ```bash
-   cd dynamic-kubernetes-secret-editor
-   ```
+## Deployment
 
-3. Open `index.html` in your browser to use the tool.
+GitHub Actions builds `dist/` and deploys it to GitHub Pages from `main`. In the repository settings, set Pages to **GitHub Actions**.
 
----
+Other workflows lint, test, build, run `npm audit` at high severity, and analyze the code with CodeQL.
 
-## 🖥️ Usage
+## Security
 
-### Method 1: File Upload 📤
+Read [SECURITY.md](SECURITY.md) before using real credentials. The safe default is a development Secret, on a machine you trust.
 
-1. **Upload a YAML File**: Click the "Upload YAML File" button and select a Kubernetes secret YAML file.
+## License
 
-### Method 2: Paste Content 📋
+[MIT](LICENSE) © Cagatay URESIN
 
-1. **Paste YAML Content**: Copy your Kubernetes secret YAML and paste it into the text area.
-
-2. **Use Shortcuts**:
-   - `Ctrl+Enter` to process the YAML
-   - `Ctrl+Shift+C` to clear the content
-   - `Tab` for proper YAML indentation
-
-### Common Steps 🔄
-
-1. **Edit Decoded Fields**: Modify the decoded Base64 values directly in the input fields.
-2. **Preview Changes**: View the updated YAML in the preview section with syntax highlighting.
-3. **Download the Updated YAML**: Click the "Download" button to save the modified YAML file.
-
-### Quick Test 🧪
-
-Use the included `test-secret.yaml` file to quickly test the application features.
-
----
-
-## 🛡️ License
-
-This project is licensed under the [MIT License](https://opensource.org/licenses/MIT). Feel free to use, modify, and distribute it as per the license terms.
-
----
-
-## 🤝 Contributing
-
-Contributions are welcome! If you have ideas for improvements or find any bugs, feel free to open an issue or submit a pull request.
-
-1. Fork the repository 🍴
-
-2. Create a new branch:
-
-   ```bash
-   git checkout -b feature/your-feature-name
-   ```
-
-3. Commit your changes:
-
-   ```bash
-   git commit -m "Add your feature description"
-   ```
-
-4. Push to the branch:
-
-   ```bash
-   git push origin feature/your-feature-name
-   ```
-
-5. Open a pull request 🎉
-
----
-
-## 🌐 Connect with Me
-
-- **GitHub**: [cagatayuresin](https://github.com/cagatayuresin) 🐙
-- **LinkedIn**: [Cagatay URESIN](https://www.linkedin.com/in/cagatayuresin/) 💼
-- **Email**: [cagatayuresin@gmail.com](mailto:cagatayuresin@gmail.com) 📧
-
----
-
-## 🙏 Acknowledgements
-
-- Thanks to the developers of [js-yaml](https://github.com/nodeca/js-yaml) and [Highlight.js](https://highlightjs.org/) for their amazing libraries 🙌
-- Inspired by the need for a simple and intuitive Kubernetes secret management tool 💡
-- Special thanks to the open-source community for continuous inspiration 🌟
-
----
-
-## 📝 Notes
-
-- This project is hosted on **GitHub Pages** 🌍
-- To deploy updates, simply push changes to the `main` branch 🚀
-- All data processing happens **locally** - no data is sent to external servers 🔒
-- Compatible with all modern browsers and mobile devices 📱
-
----
-
-## 🎯 Version History
-
-See [CHANGELOG.md](CHANGELOG.md) for detailed version history and updates.
-
----
-
-## 🔒 Security
-
-For security guidelines and best practices, see [SECURITY.md](SECURITY.md).
-
----
-
-Enjoy using the **Dynamic Kubernetes Secret Editor**! 🎊✨
+- GitHub: [cagatayuresin](https://github.com/cagatayuresin)
+- LinkedIn: [Cagatay URESIN](https://www.linkedin.com/in/cagatayuresin/)
+- Site: [cagatayuresin.com](https://cagatayuresin.com)

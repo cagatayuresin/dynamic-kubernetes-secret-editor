@@ -1,30 +1,17 @@
-# Security Guidelines
+# Security
 
-## Important Security Notes
+This editor runs entirely in the browser. Secret YAML is not uploaded and is not written to `localStorage`. The only saved preference is the color theme.
 
-**WARNING**: This tool processes Kubernetes secrets locally in your browser. For maximum security:
+Older builds of this project stored `yamlContent` and `secretObject` in `localStorage`. Opening this version removes those keys.
 
-1. **Use only in trusted environments**
-2. **Clear browser data after use** (localStorage contains secret data)
-3. **Avoid using on shared computers**
-4. **Do not use with production secrets on public networks**
+## Use it carefully
 
-## Security Features
+- Prefer development and test secrets.
+- Do not edit production secrets on a shared or untrusted computer.
+- A person who can see the screen, or who can use the browser's developer tools, can read the values.
+- Binary fields stay Base64. If a value is not valid UTF-8, the editor will not guess at a decoding.
+- Export replaces `stringData` with Base64 `data`. Cluster fields such as `uid` and `resourceVersion` are left out of the download.
 
-- All processing happens locally in browser (no server upload)
-- No network requests for secret data
-- localStorage can be manually cleared
+## What to do after editing
 
-## Recommended Usage
-
-- Use for development/testing secrets only
-- Clear browser localStorage after each session
-- Use in private browsing mode for sensitive data
-
-## Clear Data
-
-To manually clear stored data:
-```javascript
-localStorage.removeItem('yamlContent');
-localStorage.removeItem('secretObject');
-```
+Close the tab when you are finished. Use the Reset control if you want to drop the in-memory Secret first. Private browsing is a reasonable extra step for sensitive values.

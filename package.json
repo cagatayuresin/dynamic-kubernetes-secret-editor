@@ -1,0 +1,33 @@
+{
+  "name": "dynamic-kubernetes-secret-editor",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Browser-local editor for Kubernetes Secrets. Decode, edit, and export YAML without uploading it.",
+  "license": "MIT",
+  "author": "Cagatay URESIN <cagatayuresin@gmail.com>",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "test": "vitest run --coverage",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "highlight.js": "^11.12.0",
+    "js-yaml": "^5.5.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@vitest/coverage-v8": "^5.1.1",
+    "eslint": "^10.15.0",
+    "happy-dom": "^21.0.4",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.74.0",
+    "vite": "^8.3.8",
+    "vitest": "^5.1.1"
+  }
+}

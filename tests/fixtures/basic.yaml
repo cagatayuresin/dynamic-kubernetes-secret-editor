@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: basic
+  namespace: demo
+  labels:
+    app: demo
+    tier: 1
+  annotations:
+    note: kept
+  uid: should-strip
+  resourceVersion: "9"
+type: Opaque
+data:
+  username: dXNlcg==
+  token: "dG9rZW4=\n"
+immutable: true
