@@ -46,11 +46,13 @@ On a narrow screen the preview stacks under the editor. On a wide screen it stay
 
 ## Versioning
 
-This repository starts at 1.0.0. Update `package.json` and add a matching section to [CHANGELOG.md](CHANGELOG.md). Pushing a tag such as `v1.0.0` publishes a GitHub Release.
+This repository starts at 1.0.0. Update `package.json` and add a matching section to [CHANGELOG.md](CHANGELOG.md).
+
+A GitHub Release is not published automatically. The release workflow stays manual until the Sonar review is finished. After that, tagging `v1.0.0` can publish the release again.
 
 ## Deployment
 
-GitHub Actions builds `dist/` and deploys it to GitHub Pages from `main`. In the repository settings, set Pages to **GitHub Actions**.
+GitHub Actions builds `dist/` and deploys it to GitHub Pages from `main`. In the repository settings, set Pages to **GitHub Actions**. That deploy is separate from a versioned GitHub Release.
 
 Other workflows lint, test, build, run `npm audit` at high severity, and analyze the code with CodeQL.
 
