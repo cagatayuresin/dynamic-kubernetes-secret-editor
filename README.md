@@ -48,7 +48,7 @@ On a narrow screen the preview stacks under the editor. On a wide screen it stay
 
 This repository starts at 1.0.0. Update `package.json` and add a matching section to [CHANGELOG.md](CHANGELOG.md).
 
-A GitHub Release is not published automatically. The release workflow stays manual until the Sonar review is finished. After that, tagging `v1.0.0` can publish the release again.
+Pushing a `v*` tag, such as `v1.0.0`, runs the release workflow. It tests, builds, and publishes the GitHub Release.
 
 ## Deployment
 
