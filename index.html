@@ -42,15 +42,19 @@
     </script>
     <script>
       (function () {
+        var theme = 'light';
         try {
           var saved = localStorage.getItem('theme');
-          var theme = saved === 'light' || saved === 'dark'
-            ? saved
-            : (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-          document.documentElement.dataset.theme = theme;
+          if (saved === 'light' || saved === 'dark') {
+            theme = saved;
+          } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+            theme = 'dark';
+          }
         } catch (error) {
-          document.documentElement.dataset.theme = 'light';
+          // Private browsing can block localStorage. The light theme stays.
+          theme = 'light';
         }
+        document.documentElement.dataset.theme = theme;
       })();
     </script>
   </head>

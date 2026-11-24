@@ -101,21 +101,8 @@ export function parseSecret(yamlText: string): SecretModel {
   }
 
   const name = assertName(metadata.name);
-  let namespace = '';
-  if (metadata.namespace !== undefined) {
-    if (typeof metadata.namespace !== 'string') {
-      throw new SecretError('Namespace must be a string');
-    }
-    namespace = assertNamespace(metadata.namespace);
-  }
-
-  let type = 'Opaque';
-  if (doc.type !== undefined) {
-    if (typeof doc.type !== 'string') {
-      throw new SecretError('Secret type must be a string');
-    }
-    type = assertType(doc.type);
-  }
+  const namespace = readNamespace(metadata);
+  const type = readType(doc);
 
   const data = readOptionalMap(doc.data, 'data');
   const stringData = readOptionalMap(doc.stringData, 'stringData');
@@ -241,8 +228,9 @@ export function downloadFilename(name: string, now = new Date()): string {
     .trim()
     .toLowerCase()
     .replace(/[^a-z0-9.-]+/g, '-')
-    .replace(/^[-.]+|[-.]+$/g, '')
-    .replace(/-+/g, '-') || 'secret';
+    .replace(/^[-.]+/, '')
+    .replace(/[-.]+$/, '')
+    .replace(/-{2,}/g, '-') || 'secret';
   const day = now.toISOString().slice(0, 10);
   return `${slug}-${day}.yaml`;
 }
@@ -308,6 +296,26 @@ function mergeFields(
 
 function isV1(apiVersion: string): boolean {
   return apiVersion === 'v1' || apiVersion.endsWith('/v1');
+}
+
+function readNamespace(metadata: Record<string, unknown>): string {
+  if (metadata.namespace === undefined) {
+    return '';
+  }
+  if (typeof metadata.namespace !== 'string') {
+    throw new SecretError('Namespace must be a string');
+  }
+  return assertNamespace(metadata.namespace);
+}
+
+function readType(doc: Record<string, unknown>): string {
+  if (doc.type === undefined) {
+    return 'Opaque';
+  }
+  if (typeof doc.type !== 'string') {
+    throw new SecretError('Secret type must be a string');
+  }
+  return assertType(doc.type);
 }
 
 function readMap(value: unknown, label: string): Record<string, unknown> | null {

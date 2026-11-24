@@ -6,8 +6,8 @@ export type DecodeResult =
 export function encodeBase64(text: string): string {
   const bytes = new TextEncoder().encode(text);
   let binary = '';
-  for (let index = 0; index < bytes.length; index += 1) {
-    binary += String.fromCharCode(bytes[index]);
+  for (const byte of bytes) {
+    binary += String.fromCodePoint(byte);
   }
   return btoa(binary);
 }
@@ -25,7 +25,7 @@ export function decodeBase64(value: string): DecodeResult {
     return { status: 'invalid' };
   }
 
-  const bytes = Uint8Array.from(binary, (char) => char.charCodeAt(0));
+  const bytes = Uint8Array.from(binary, (char) => char.codePointAt(0) ?? 0);
   try {
     const text = new TextDecoder('utf-8', { fatal: true }).decode(bytes);
     return { status: 'text', text };

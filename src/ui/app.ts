@@ -612,7 +612,7 @@ function template(): string {
 function element(root: HTMLElement, id: string): HTMLElement {
   const node = root.querySelector(`#${id}`);
   if (!(node instanceof HTMLElement)) {
-    throw new Error(`Missing #${id}`);
+    throw new TypeError(`Missing #${id}`);
   }
   return node;
 }
@@ -620,7 +620,7 @@ function element(root: HTMLElement, id: string): HTMLElement {
 function input(root: HTMLElement, id: string): HTMLInputElement {
   const node = element(root, id);
   if (!(node instanceof HTMLInputElement)) {
-    throw new Error(`Missing input #${id}`);
+    throw new TypeError(`Missing input #${id}`);
   }
   return node;
 }
@@ -628,7 +628,7 @@ function input(root: HTMLElement, id: string): HTMLInputElement {
 function textarea(root: HTMLElement, id: string): HTMLTextAreaElement {
   const node = element(root, id);
   if (!(node instanceof HTMLTextAreaElement)) {
-    throw new Error(`Missing textarea #${id}`);
+    throw new TypeError(`Missing textarea #${id}`);
   }
   return node;
 }
@@ -636,7 +636,7 @@ function textarea(root: HTMLElement, id: string): HTMLTextAreaElement {
 function button(root: HTMLElement, id: string): HTMLButtonElement {
   const node = element(root, id);
   if (!(node instanceof HTMLButtonElement)) {
-    throw new Error(`Missing button #${id}`);
+    throw new TypeError(`Missing button #${id}`);
   }
   return node;
 }
@@ -644,7 +644,7 @@ function button(root: HTMLElement, id: string): HTMLButtonElement {
 function select(root: HTMLElement, id: string): HTMLSelectElement {
   const node = element(root, id);
   if (!(node instanceof HTMLSelectElement)) {
-    throw new Error(`Missing select #${id}`);
+    throw new TypeError(`Missing select #${id}`);
   }
   return node;
 }
@@ -652,7 +652,7 @@ function select(root: HTMLElement, id: string): HTMLSelectElement {
 function form(root: HTMLElement, id: string): HTMLFormElement {
   const node = element(root, id);
   if (!(node instanceof HTMLFormElement)) {
-    throw new Error(`Missing form #${id}`);
+    throw new TypeError(`Missing form #${id}`);
   }
   return node;
 }
@@ -660,7 +660,7 @@ function form(root: HTMLElement, id: string): HTMLFormElement {
 function paragraph(root: HTMLElement, id: string): HTMLParagraphElement {
   const node = element(root, id);
   if (!(node instanceof HTMLParagraphElement)) {
-    throw new Error(`Missing paragraph #${id}`);
+    throw new TypeError(`Missing paragraph #${id}`);
   }
   return node;
 }
@@ -668,7 +668,7 @@ function paragraph(root: HTMLElement, id: string): HTMLParagraphElement {
 function code(root: HTMLElement, id: string): HTMLElement {
   const node = element(root, id);
   if (!(node instanceof HTMLElement)) {
-    throw new Error(`Missing code #${id}`);
+    throw new TypeError(`Missing code #${id}`);
   }
   return node;
 }
